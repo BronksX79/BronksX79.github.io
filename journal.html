@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme", t || (d?"dark":"light"));})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Journal — Bronks Labs</title>
+<meta name="description" content="Dated engineering notes from Bronks Labs — the process, not just the finished result.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  .journal{ padding: 72px 0 96px; }
+  .entry{
+    display:grid; grid-template-columns: 140px 1fr; gap: 28px;
+    padding: 36px 0; border-top: 1px solid var(--border);
+  }
+  .entry:last-child{ border-bottom: 1px solid var(--border); }
+  .entry .date{
+    font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-muted); padding-top: 4px;
+  }
+  .entry h3{
+    font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin-bottom: 10px;
+  }
+  .entry p{ color: var(--ink-muted); font-size: 0.96rem; max-width: 640px; }
+  .entry .tag{
+    display:inline-block; margin-top: 14px; font-family: var(--font-mono); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.04em; color: var(--blue);
+    background: var(--blue-dim); padding: 4px 10px; border-radius: 100px;
+  }
+  @media (max-width: 620px){
+    .entry{ grid-template-columns: 1fr; gap: 8px; }
+  }
+  .journal-note{
+    max-width: 620px; margin-bottom: 40px; color: var(--ink-muted); font-size: 1.05rem;
+  }
+  .entry-photo{
+    grid-column: 1 / -1;
+    margin-top: 20px;
+  }
+  .entry-photo img{
+    width: 100%;
+    max-width: 720px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: block;
+  }
+  .entry-photo .caption{
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+      </svg>
+      Bronks Labs
+    </a>
+    <div class="nav-right">
+    <nav class="links">
+      <a href="lab.html">Lab</a>
+      <a href="journal.html" class="active">Journal</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="about.html">About</a>
+    </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="banner-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="banner-logo">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="#fff" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="#fff">B</text>
+      </svg>
+      <span>Bronks Labs</span>
+    </div>
+    <span class="label">Learning Journal</span>
+    <h1>Notes from the build</h1>
+    <p>Not a blog — an engineering log. Dated entries on what I actually did, in the order I did it.</p>
+  </div>
+</section>
+
+<section class="journal">
+  <div class="wrap">
+    <p class="journal-note">Replace these with your real entries as you go — one per session or milestone is usually enough. Keep the date, a short title, and what actually happened.</p>
+
+    <div class="entry">
+      <div class="date">JUL 2026</div>
+      <div>
+        <h3>Adding dark mode</h3>
+        <p>Added a site-wide dark mode with a toggle in the nav. Since every color on the site already went through CSS variables, the whole theme flips by just redefining those variables under a second attribute selector and toggling one attribute on the page — no per-component dark styles needed. Remembers your choice across visits, and defaults to your system preference the first time. Along the way, found two colors that had been hardcoded instead of using variables — a good reminder of why that's worth avoiding.</p>
+        <span class="tag">Feature</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">JUL 2026</div>
+      <div>
+        <h3>Chasing a phantom cache bug (that wasn't)</h3>
+        <p>Spent a long session convinced the hero banner not showing on four pages was a browser caching issue — cleared cache, tried incognito, disabled cache in DevTools, none of it worked. Turned out to be a real bug: a CSS url() path resolves relative to the CSS file's own location, not the HTML page that loads it, so the same relative path worked from index.html but broke from inside css/styles.css. Also found the portfolio was actually being served from a different port than I was testing against the whole time. Lesson: rule things out systematically, and check what URL is actually being requested before assuming it's a cache problem.</p>
+        <span class="tag">Debugging</span>
+      </div>
+    </div>
+    
+    <div class="entry">
+      <div class="date">JUL 2026</div>
+      <div>
+        <h3>Building Bronks Labs itself</h3>
+        <p>Started turning months of scattered conversations about the homelab, the novel, and the server into an actual site — decided early on that it had to read as documentation, not a CV. First pages: homepage, the Lab dashboard.</p>
+        <span class="tag">Site</span>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="date">JUL 2026</div>
+      <div>
+        <h3>Deploying the test site with Caddy</h3>
+        <p>First real deployment, on a private test path — no domain yet, just proving the server can serve the site correctly before anything goes public. Sorted out folder structure issues (CSS and assets need to keep their relative paths).</p>
+        <span class="tag">Infrastructure</span>
+        <div class="entry-photo">
+          <img src="assets/images/journal/deploy-setup.jpg" alt="Multi-laptop, multi-monitor setup used during the server deployment session">
+          <div class="caption">The HP 15-bw0xx — earlier turned into a ChromeOS Flex machine — used as a guide, Fujitsu AH530 mid Ubuntu install, external monitor and a NVMe drive Ventoy connected.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+          <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Bronks Labs</div>
+          <div class="footer-tagline">Building. Learning. Documenting.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:hello@bronkslabs.uk">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bronks Labs.</span>
+      <span class="mono">status: active</span>
+    </div>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>

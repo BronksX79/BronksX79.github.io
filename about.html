@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme", t || (d?"dark":"light"));})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Bronks Labs</title>
+<meta name="description" content="Martin — self-directed learner exploring AI, LLMs, Linux, and hardware, one real project at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  .intro{ padding: 72px 0 48px; border-bottom: 1px solid var(--border); }
+  .intro-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 760px){ .intro-grid{ grid-template-columns: 1fr; gap: 32px; } }
+  .intro h2{ font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin-bottom: 16px; }
+  .intro p{ color: var(--ink-muted); font-size: 1rem; margin-bottom: 14px; }
+  .philosophy-link{
+    display:inline-flex; align-items:center; gap: 6px; margin-top: 6px;
+    font-family: var(--font-mono); font-size: 0.85rem; color: var(--blue);
+  }
+  .philosophy-link:hover{ text-decoration: underline; }
+
+  .timeline-section{ padding: 80px 0 96px; }
+  .timeline-section .label{
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue); display:block; margin-bottom: 40px;
+  }
+  .timeline{ position: relative; padding-left: 28px; }
+  .timeline::before{
+    content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 1px; background: var(--border);
+  }
+  .t-item{ position: relative; padding-bottom: 40px; }
+  .t-item:last-child{ padding-bottom: 0; }
+  .t-item::before{
+    content: ''; position: absolute; left: -28px; top: 4px; width: 11px; height: 11px;
+    border-radius: 50%; background: var(--bg); border: 2px solid var(--blue);
+  }
+  .t-item:last-child::before{ background: var(--blue); }
+  .t-item h3{ font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; }
+  .t-item p{ color: var(--ink-muted); font-size: 0.92rem; max-width: 520px; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+      </svg>
+      Bronks Labs
+    </a>
+    <div class="nav-right">
+    <nav class="links">
+      <a href="lab.html">Lab</a>
+      <a href="journal.html">Journal</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="banner-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="banner-logo">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="#fff" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="#fff">B</text>
+      </svg>
+      <span>Bronks Labs</span>
+    </div>
+    <span class="label">About</span>
+    <h1>Hi, I'm Martin.</h1>
+    <p>Self-directed learner exploring AI, LLMs, Linux, and hardware — mostly by building things and writing down what happened.</p>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap intro-grid">
+    <div>
+      <h2>How I learn</h2>
+      <p>I don't learn well from tutorials followed start to finish. I learn by picking a real question, building something to answer it, and hitting the parts the tutorial never covers.</p>
+      <p>That's the whole method behind Bronks Labs: building over watching, real hardware over toy demos, and writing it all down — including the parts that didn't work.</p>
+      <a class="philosophy-link" href="philosophy.html">Read the full philosophy →</a>
+    </div>
+    <div>
+      <h2>What I'm doing now</h2>
+      <p>Running a local AI homelab on repurposed hardware, learning Linux and Docker through a headless home server, and using AI as a writing collaborator on a novel — all documented as it happens.</p>
+      <p>Current focus: expanding the headless server, building this site, and documenting the AI workflows as I go.</p>
+    </div>
+  </div>
+</section>
+
+<section class="timeline-section">
+  <div class="wrap">
+    <span class="label">The path here</span>
+    <div class="timeline">
+      <div class="t-item">
+        <h3>Warehouse &amp; Logistics</h3>
+        <p>Where the work ethic started — long before any of this was technical.</p>
+      </div>
+      <div class="t-item">
+        <h3>Kidney Transplant Recovery</h3>
+        <p>A long recovery, and the time it created to think differently about what to do next.</p>
+      </div>
+      <div class="t-item">
+        <h3>Online Learning</h3>
+        <p>Started teaching myself, one course and one rabbit hole at a time.</p>
+      </div>
+      <div class="t-item">
+        <h3>Cyber Security</h3>
+        <p>First real technical depth — systems, networks, and how things actually break.</p>
+      </div>
+      <div class="t-item">
+        <h3>AI Workstation</h3>
+        <p>Turned a decade-old office PC into a local AI machine with a dropped-in GPU.</p>
+      </div>
+      <div class="t-item">
+        <h3>AI Homelab</h3>
+        <p>Expanded from one machine into a proper local AI environment.</p>
+      </div>
+      <div class="t-item">
+        <h3>Headless Home Server</h3>
+        <p>Linux, Docker, and self-hosting — learned the hard way, over SSH.</p>
+      </div>
+      <div class="t-item">
+        <h3>Bronks Labs</h3>
+        <p>Where all of it gets documented, properly, in one place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+          <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Bronks Labs</div>
+          <div class="footer-tagline">Building. Learning. Documenting.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:hello@bronkslabs.uk">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bronks Labs.</span>
+      <span class="mono">status: active</span>
+    </div>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>

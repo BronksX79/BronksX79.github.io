@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme", t || (d?"dark":"light"));})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philosophy — Bronks Labs</title>
+<meta name="description" content="Why Bronks Labs works the way it does — the thinking behind the building, learning, and documenting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  .principles{ padding: 72px 0; border-bottom: 1px solid var(--border); }
+  .principles-head{ max-width: 620px; margin-bottom: 56px; }
+  .principle{
+    display:grid; grid-template-columns: 44px 1fr; gap: 20px;
+    padding: 32px 0; border-top: 1px solid var(--border);
+  }
+  .principle:last-child{ border-bottom: 1px solid var(--border); }
+  .principle .mark{
+    font-family: var(--font-mono); font-size: 0.8rem; color: var(--blue);
+    border: 1px solid var(--border); width: 36px; height: 36px; border-radius: 4px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .principle h3{
+    font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin-bottom: 8px;
+  }
+  .principle p{ color: var(--ink-muted); font-size: 0.96rem; max-width: 620px; }
+
+  .constitution{ padding: 80px 0; background: var(--bg-subtle); }
+  .constitution-inner{ max-width: 700px; margin: 0 auto; }
+  .constitution .label{
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue); display:block; margin-bottom: 14px; text-align:center;
+  }
+  .constitution h2{
+    font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; text-align:center; margin-bottom: 40px;
+  }
+  .constitution ul{ list-style: none; }
+  .constitution li{
+    display:flex; gap: 12px; padding: 14px 0; border-top: 1px solid var(--border);
+    font-size: 0.98rem; color: var(--ink);
+  }
+  .constitution li:last-child{ border-bottom: 1px solid var(--border); }
+  .constitution li::before{
+    content: '→'; color: var(--blue); font-family: var(--font-mono); flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+      </svg>
+      Bronks Labs
+    </a>
+    <div class="nav-right">
+    <nav class="links">
+      <a href="lab.html">Lab</a>
+      <a href="journal.html">Journal</a>
+      <a href="philosophy.html" class="active">Philosophy</a>
+      <a href="about.html">About</a>
+    </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="banner-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="banner-logo">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="#fff" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="#fff">B</text>
+      </svg>
+      <span>Bronks Labs</span>
+    </div>
+    <span class="label">Philosophy</span>
+    <h1>Why I build this way</h1>
+    <p>Not a mission statement. Just the thinking that's held up, project after project.</p>
+  </div>
+</section>
+
+<section class="principles">
+  <div class="wrap">
+    <div class="principles-head">
+      <p style="color:var(--ink-muted); font-size:1.05rem;">Every project on this site started as a question, not a plan. These are the habits that turned that curiosity into something worth documenting.</p>
+    </div>
+
+    <div class="principle">
+      <div class="mark">01</div>
+      <div>
+        <h3>Why I document everything</h3>
+        <p>A working project with no notes is a project only I can maintain — and only for as long as I remember why I made each decision. Writing it down, including the boring parts, is what makes it useful to future-me and to anyone else.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="mark">02</div>
+      <div>
+        <h3>Why I use AI, but verify its output</h3>
+        <p>AI is a fast way to get a first draft of an idea, a config, or a paragraph — not a source of truth. Every suggestion gets checked against real behavior before it's kept. The judgment stays mine; the acceleration is what AI is for.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="mark">03</div>
+      <div>
+        <h3>Why mistakes are documented instead of hidden</h3>
+        <p>The polished version of a project teaches you almost nothing. What went wrong, and why, is usually the most useful part of the record — for me on the next project, and for anyone reading who's stuck on the same problem.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="mark">04</div>
+      <div>
+        <h3>Why old hardware deserves a second life</h3>
+        <p>A decade-old office PC with a modern GPU dropped in is still a capable machine. Most of what I've learned about systems, thermals, and constraints came from working within hardware limits rather than buying around them.</p>
+      </div>
+    </div>
+
+    <div class="principle">
+      <div class="mark">05</div>
+      <div>
+        <h3>Why building teaches more than consuming</h3>
+        <p>Tutorials show you a path that already worked for someone else. Building something from a real question means hitting the parts tutorials skip — which is exactly where the actual learning happens.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="constitution">
+  <div class="wrap constitution-inner">
+    <span class="label">The constitution</span>
+    <h2>Every project should</h2>
+    <ul>
+      <li>Begin with a real question.</li>
+      <li>Solve a real problem.</li>
+      <li>Document both success and failure.</li>
+      <li>Clearly distinguish AI-generated ideas from human verification.</li>
+      <li>Be understandable by someone discovering the project for the first time.</li>
+      <li>Leave a better record than existed before the project began.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+          <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Bronks Labs</div>
+          <div class="footer-tagline">Building. Learning. Documenting.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:hello@bronkslabs.uk">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bronks Labs.</span>
+      <span class="mono">status: active</span>
+    </div>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>
