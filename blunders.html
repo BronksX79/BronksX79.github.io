@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme", t || (d?"dark":"light"));})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blunders — Bronks Labs</title>
+<meta name="description" content="Every dumb mistake, wrong turn, and half-day-wasted moment across every project — not just Bronks Labs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  .blunders{ padding: 72px 0 96px; }
+  .blunders-note{
+    max-width: 640px; margin-bottom: 40px; color: var(--ink-muted); font-size: 1.05rem;
+  }
+  .entry{
+    display:grid; grid-template-columns: 140px 1fr; gap: 28px;
+    padding: 36px 0; border-top: 1px solid var(--border);
+  }
+  .entry:last-child{ border-bottom: 1px solid var(--border); }
+  .entry .date{
+    font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-muted); padding-top: 4px;
+  }
+  .entry h3{
+    font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; margin-bottom: 10px;
+  }
+  .entry p{ color: var(--ink-muted); font-size: 0.96rem; max-width: 640px; }
+  .entry-tags{ display:flex; align-items:center; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .entry .tag{
+    display:inline-block; font-family: var(--font-mono); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.04em; color: var(--amber);
+    background: var(--amber-dim); padding: 4px 10px; border-radius: 100px;
+  }
+  .entry .project{
+    display:inline-flex; align-items:center; gap: 5px;
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted);
+    border: 1px solid var(--border); padding: 4px 10px; border-radius: 100px;
+  }
+  .entry .project::before{ content: '⚑'; font-size: 0.7rem; }
+  .entry-link{
+    display:inline-block; margin-top: 14px; margin-left: 2px;
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue);
+  }
+  .entry-link:hover{ text-decoration: underline; }
+  @media (max-width: 620px){
+    .entry{ grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+      </svg>
+      Bronks Labs
+    </a>
+    <div class="nav-right">
+      <nav class="links">
+        <a href="lab.html">Lab</a>
+        <a href="journal.html">Journal</a>
+        <a href="blunders.html" class="active">Blunders</a>
+        <a href="philosophy.html">Philosophy</a>
+        <a href="about.html">About</a>
+      </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="banner-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="banner-logo">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="#fff" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="#fff">B</text>
+      </svg>
+      <span>Bronks Labs</span>
+    </div>
+    <span class="label">Blunders</span>
+    <h1>Where the stupid mistakes live</h1>
+    <p>Every project above has a polished write-up. This is the unfiltered version — wrong turns, wasted afternoons, and the one time it was just a Save button.</p>
+  </div>
+</section>
+
+<section class="blunders">
+  <div class="wrap">
+    <p class="blunders-note">Not tied to Bronks Labs specifically — anything, from any project, that wasted an afternoon and taught me something dumb-but-useful. Updated whenever something ships, not on a schedule.</p>
+    
+    <div class="entry">
+      <div class="date">JUL 2026</div>
+      <div>
+        <h3>Building the Blunders page generated its own blunder</h3>
+        <p>Added this very page, then spent an hour convinced the new nav link simply wouldn't appear anywhere — cache clears, incognito, curl checks, the works. Turned out the server directory had recently been replaced with a fresh git clone, and the running Caddy container was still bind-mounted to the old, deleted copy of it — invisible from the host, invisible from git, only visible by comparing inode numbers directly. Fixed by force-recreating the container so Docker re-established the mount. Then, cleaning up: a wildcard <code>sed</code> command meant to add "Blunders" to the nav ran against every HTML file in the folder — including the brand-new Blunders page itself, which already had its own nav link. Ended up with two.</p>
+        <div class="entry-tags">
+          <span class="tag">Infrastructure</span>
+          <span class="project">Bronks Labs</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="date">JUL 2026</div>
+      <div>
+        <h3>MusicBrainz Picard couldn't reach Tailscale (because I forgot to press Save)</h3>
+        <p>Spent half a day convinced I'd broken something in the Tailscale ACL — rewrote the rule more times than I want to admit, restarted services, burned a stack of AI tokens reasoning through syntax that was never the problem. The rule was fine the entire time. I'd typed the four numbers, looked at it, and moved on — without ever clicking the actual Save button sitting right there in the ACL editor. Nothing had taken effect. Not once.</p>
+        <div class="entry-tags">
+          <span class="tag">Networking</span>
+          <span class="project">Tailscale ACL</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+          <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Bronks Labs</div>
+          <div class="footer-tagline">Building. Learning. Documenting.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/BronksX79" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:hello@bronkslabs.uk">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bronks Labs.</span>
+      <span class="mono">status: active</span>
+    </div>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>
