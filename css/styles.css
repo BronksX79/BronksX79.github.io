@@ -137,12 +137,36 @@ nav.links a:hover::after, nav.links a.active::after{ transform: scaleX(1); }
 }
 .page-header .wrap{ position: relative; z-index: 2; }
 .page-header .banner-logo{
-  display:flex; align-items:center; gap: 10px; margin-bottom: 28px;
+  display:flex; align-items:center; gap: 10px; margin-bottom: 20px;
   font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: #fff;
 }
 .page-header .banner-logo .hex{ width: 24px; height: 24px; }
 .page-header .banner-logo .hex polygon{ stroke: #fff; }
 .page-header .banner-logo .hex text{ fill: #fff; }
+
+.brand-signature{
+  max-width: 360px;
+  margin-bottom: 32px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+.brand-signature .motto{
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.5;
+}
+.brand-signature .quote{
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--hero-text-dim);
+  line-height: 1.5;
+}
 .page-header .label{
   font-family: var(--font-mono);
   font-size: 0.75rem;
