@@ -194,9 +194,9 @@
           <tr><td>Case</td><td>Kolink Unity Meshbay Performance Mesh mid-tower, 3× PWM fans, 10-port fan hub</td></tr>
           <tr><td>Motherboard</td><td>HP 8054, KBC v05.39</td></tr>
           <tr><td>CPU</td><td>Intel Core i7-6700 (3.40GHz), LGA1151</td></tr>
-          <tr><td>RAM</td><td>32GB @ 2133MHz</td></tr>
+          <tr><td>RAM</td><td>32GB DDR4 @ 2133MHz</td></tr>
           <tr><td>GPU</td><td>Zotac GeForce RTX 3060 Twin Edge OC, 12GB GDDR6</td></tr>
-          <tr><td>Storage</td><td>256GB NVMe (boot, via PCIe adapter), 256GB SATA SSD, 256GB M.2 SSD (enclosure)</td></tr>
+          <tr><td>Storage</td><td>256GB NVMe (boot, via PCIe X4 adapter), 256GB SATA SSD, 256GB M.2 SSD (enclosure), 256GB NVMe (via PCIe X1 adapter)</td></tr>
           <tr><td>CPU cooling</td><td>Thermalright Assassin King 120 SE ARGB</td></tr>
           <tr><td>PSU</td><td>MSI MAG A650BN, 80+ Bronze</td></tr>
           <tr><td>OS</td><td>Windows 11 Pro</td></tr>
@@ -210,12 +210,18 @@
         <h3>Headless Home Server</h3>
         <span class="status operational"><span class="dot"></span>Operational</span>
       </div>
-      <p class="desc">Learning Linux, Docker, and self-hosting the hard way — no GUI, no shortcuts, everything over SSH.</p>
+      <p class="desc">A 2010 Fujitsu LifeBook AH530 repurposed into a lightweight self-hosted Linux server, managed entirely over SSH.</p>
       <details>
         <summary>Details</summary>
         <table class="spec-table">
-          <tr><td>Focus</td><td>Container orchestration, reverse proxying, and self-hosted services.</td></tr>
-          <tr><td>Serves</td><td>This site, via Caddy.</td></tr>
+          <tr><td>Platform</td><td>Ubuntu Server 26.04 LTS</td></tr>
+          <tr><td>Hardware</td><td>Fujitsu LifeBook AH530</td></tr>
+          <tr><td>CPU</td><td>Intel Pentium P6100 @ 2.00GHz</td></tr>
+          <tr><td>Memory</td><td>4GB DDR3 @ 1066MHz</td></tr>
+          <tr><td>Storage</td><td>128GB SATA SSD (boot), 1TB HDD</td></tr>
+          <tr><td>Runtime</td><td>Docker Engine & Docker Compose</td></tr>
+          <tr><td>Reverse Proxy</td><td>Caddy</td></tr>
+          <tr><td>Runs</td><td>Immich, Pi-hole, Homepage, Uptime Kuma, Vaultwarden, Navidrome, MeTube, File Browser</td></tr>
         </table>
       </details>
     </div>
