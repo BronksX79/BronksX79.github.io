@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme", t || (d?"dark":"light"));})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Homelab — Bronks Labs</title>
+<meta name="description" content="How Bronks Labs runs local AI: the models, the RAG stack, and the workflow that turns AI sessions into a real knowledge base.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  /* ---------- Intro + repo CTA ---------- */
+  .homelab-intro{ padding: 72px 0 48px; }
+  .homelab-intro .lede{ max-width: 640px; color: var(--ink-muted); font-size: 1.05rem; }
+
+  .repo-cta{
+    margin-top: 36px;
+    display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    border: 1px solid var(--border); border-radius: 6px; padding: 22px 26px;
+    background: var(--bg-subtle);
+  }
+  .repo-cta-text{ font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); }
+  .repo-cta-text strong{ color: var(--ink); font-weight: 500; }
+  .repo-cta .buttons{ display:flex; gap: 12px; flex-wrap: wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap: 8px;
+    font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.02em;
+    padding: 10px 16px; border-radius: 6px; border: 1px solid var(--border);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn.primary{ background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  :root[data-theme="dark"] .btn.primary{ background: var(--ink); color: var(--bg); }
+  .btn.primary:hover{ opacity: 0.86; }
+  .btn.ghost{ color: var(--ink); }
+  .btn.ghost:hover{ border-color: var(--card-hover-border); background: var(--bg); }
+
+  /* ---------- Vertical workflow ---------- */
+  .workflow{ padding: 48px 0 72px; border-top: 1px solid var(--border); }
+  .section-label{
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue); display:block; margin-bottom: 14px;
+  }
+  .workflow h2{ font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin-bottom: 12px; }
+  .workflow > .wrap > p{ color: var(--ink-muted); max-width: 600px; margin-bottom: 40px; }
+
+  .flow{ max-width: 560px; }
+  .flow-step{
+    display:flex; gap: 18px; align-items:flex-start;
+    padding-bottom: 8px;
+  }
+  .flow-step .node{
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue);
+    border: 1px solid var(--border); background: var(--bg);
+    width: 34px; height: 34px; border-radius: 100px; flex-shrink: 0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .flow-step .body{ padding-top: 4px; }
+  .flow-step h4{ font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; margin-bottom: 4px; }
+  .flow-step p{ color: var(--ink-muted); font-size: 0.9rem; }
+  .flow-arrow{
+    margin-left: 17px; width: 1px; height: 26px; background: var(--border);
+  }
+  .flow-note{
+    margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);
+    color: var(--ink-muted); font-size: 0.92rem; max-width: 560px;
+  }
+
+  /* ---------- Stack grid ---------- */
+  .stack{ padding: 72px 0; background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .stack h2{ font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin-bottom: 12px; }
+  .stack > .wrap > p{ color: var(--ink-muted); max-width: 600px; margin-bottom: 40px; }
+  .stack-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 780px){ .stack-grid{ grid-template-columns: 1fr; } }
+
+  .stack-card{
+    border: 1px solid var(--border); border-radius: 6px; padding: 24px;
+    background: var(--bg); transition: border-color 0.15s ease;
+  }
+  .stack-card:hover{ border-color: var(--card-hover-border); }
+  .stack-card .tag{
+    display:inline-block; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--ink-muted); margin-bottom: 10px;
+  }
+  .stack-card h3{ font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; margin-bottom: 8px; }
+  .stack-card p{ color: var(--ink-muted); font-size: 0.9rem; }
+
+  /* ---------- Status snapshot ---------- */
+  .snapshot{ padding: 72px 0; }
+  .snapshot h2{ font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin-bottom: 8px; }
+  .snapshot .verified{ font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 32px; display:block; }
+  .snapshot-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  @media (max-width: 780px){ .snapshot-grid{ grid-template-columns: 1fr; gap: 32px; } }
+  .snapshot-grid h4{
+    font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-muted); margin-bottom: 14px;
+  }
+  .snapshot-grid ul{ list-style: none; }
+  .snapshot-grid li{
+    display:flex; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border); font-size: 0.92rem;
+  }
+  .snapshot-grid li:last-child{ border-bottom: 1px solid var(--border); }
+  .snapshot-grid li::before{ content: '→'; color: var(--blue); font-family: var(--font-mono); flex-shrink: 0; }
+
+  /* ---------- Principles strip ---------- */
+  .doc-approach{ padding: 72px 0; background: var(--bg-subtle); border-top: 1px solid var(--border); }
+  .doc-approach-inner{ max-width: 680px; margin: 0 auto; text-align: center; }
+  .doc-approach h2{ font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; margin-bottom: 32px; }
+  .doc-approach ul{ list-style: none; text-align: left; }
+  .doc-approach li{
+    display:flex; gap: 12px; padding: 13px 0; border-top: 1px solid var(--border); font-size: 0.95rem;
+  }
+  .doc-approach li:last-child{ border-bottom: 1px solid var(--border); }
+  .doc-approach li::before{ content: '—'; color: var(--blue); flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+      </svg>
+      Bronks Labs
+    </a>
+    <div class="nav-right">
+    <nav class="links">
+      <a href="lab.html">Lab</a>
+      <a href="homelab.html" class="active">Homelab</a>
+      <a href="journal.html">Journal</a>
+      <a href="blunders.html">Blunders</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="about.html">About</a>
+    </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="banner-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="banner-logo">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="#fff" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="#fff">B</text>
+      </svg>
+      <span>Bronks Labs</span>
+    </div>
+    <div class="brand-signature">
+      <div class="motto">Make it work first. Make it pretty last.</div>
+      <div class="quote">"Sometimes you don't even know what you're building until it starts working."</div>
+    </div>
+    <span class="label">AI Homelab</span>
+    <h1>Local AI, documented as it's built</h1>
+    <p>Local models, retrieval, and knowledge extraction — and the working method that ties them together, not just an install guide.</p>
+  </div>
+</section>
+
+<section class="homelab-intro">
+  <div class="wrap">
+    <p class="lede">This isn't a hardware build log — that lives in the <a href="lab.html" style="color:var(--blue);">HP EliteDesk AI Workstation</a> entry. This is about the <strong>working method</strong>: how local models, prompts, knowledge maps, session summaries, and human review fit together into something that stays useful after the conversation that produced it is gone.</p>
+
+    <div class="repo-cta">
+      <div class="repo-cta-text">Full documentation, dated status, and source in the repo <br><strong>github.com/BronksX79/ai-homelab</strong></div>
+      <div class="buttons">
+        <a class="btn primary" href="https://github.com/BronksX79/ai-homelab" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="btn ghost" href="lab.html">Back to Lab</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="workflow">
+  <div class="wrap">
+    <span class="section-label">The Workflow</span>
+    <h2>From conversation to knowledge base</h2>
+    <p>The goal isn't to preserve every AI conversation verbatim — it's to keep the decisions, reasoning, and lessons that will matter later, and make them retrievable.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="node">1</div>
+        <div class="body">
+          <h4>Engineering work or cloud-AI session</h4>
+          <p>Local build work, troubleshooting, or a session with ChatGPT, Claude, Google AI Mode, AI Studio, or Grok — whichever tool fits the task and is available.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">2</div>
+        <div class="body">
+          <h4>Knowledge-extraction prompt</h4>
+          <p>A repeatable prompt turns the raw session into a structured record instead of leaving the reasoning trapped in a chat history.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">3</div>
+        <div class="body">
+          <h4>Summary, knowledge map, engineering log</h4>
+          <p>An Engineering Session Summary and Knowledge Map are produced every time; a full Engineering Log is added when the session involved substantial reasoning.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">4</div>
+        <div class="body">
+          <h4>Human review</h4>
+          <p>Nothing an AI produced becomes a fact without verification. Confirmed facts, hypotheses, and future plans stay clearly separated.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">5</div>
+        <div class="body">
+          <h4>Bronks Labs knowledge base</h4>
+          <p>Reviewed material is ingested into AnythingLLM, ready for local RAG retrieval.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">6</div>
+        <div class="body">
+          <h4>Better-informed future work</h4>
+          <p>Retrieval feeds back into the next engineering decision or the next chapter of <em>Aurelia</em> — human and AI, working from the same verified record.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="flow-note">Deterministic scripts handle the predictable parts of this pipeline — like the batch workflow that syncs repositories to the PC and server. AI is reserved for the parts that genuinely need interpretation.</p>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="wrap">
+    <span class="section-label">The Stack</span>
+    <h2>Software and working method</h2>
+    <p>Each piece has a defined, current role — not a wishlist of tools. Full detail for each lives in the repo's <code>docs/software/</code> folder.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <span class="tag">Runtime</span>
+        <h3>Ollama</h3>
+        <p>Serves local language and embedding models to both AnythingLLM and Hermes Desktop. Currently configured with an 8K active context window — some installed model names reference larger windows, but that's the model name, not the runtime setting.</p>
+      </div>
+      <div class="stack-card">
+        <span class="tag">Knowledge base &amp; RAG</span>
+        <h3>AnythingLLM</h3>
+        <p>The local knowledge-base and retrieval layer, using <code>nomic-embed-text</code> for embeddings. Currently being rebuilt workspace-by-workspace from surviving source material after a prior vector-data loss — the hard copies were never lost.</p>
+      </div>
+      <div class="stack-card">
+        <span class="tag">Under evaluation</span>
+        <h3>Hermes Desktop</h3>
+        <p>An early-stage file-work experiment, not a production automation system. It's demonstrated useful file-oriented work, but has no broader operational role until it has a narrow, pre-approved purpose and an enforceable safety boundary.</p>
+      </div>
+      <div class="stack-card">
+        <span class="tag">Inventory</span>
+        <h3>Models</h3>
+        <p>Twelve local models spanning Gemma 3/4, Qwen3, and several fine-tuned variants, evaluated by demonstrated usefulness in a specific workflow rather than benchmark reputation. Gemma 3 12B and Gemma 4 12B currently drive the <em>Aurelia</em> paired-draft writing process.</p>
+      </div>
+      <div class="stack-card">
+        <span class="tag">Hybrid workflow</span>
+        <h3>Cloud AI Workflow</h3>
+        <p>Local AI runs alongside web tools — ChatGPT, Claude, Google AI Mode, AI Studio, Grok — routed pragmatically by task and availability, with cloud output always treated as input for review, not verified fact.</p>
+      </div>
+      <div class="stack-card">
+        <span class="tag">Deferred &amp; retained</span>
+        <h3>Tool Evaluations</h3>
+        <p>Supporting tools like Fooocus, Pinokio, Voicebox, and ACE Step are tracked here even while inactive, so real experiments aren't quietly forgotten or overstated as production-ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="snapshot">
+  <div class="wrap">
+    <h2>Current snapshot</h2>
+    <span class="verified">Last verified 2 August 2026 — full detail in <a href="https://github.com/BronksX79/ai-homelab/blob/main/docs/STATUS.md" target="_blank" rel="noopener" style="color:var(--blue);">docs/STATUS.md</a></span>
+
+    <div class="snapshot-grid">
+      <div>
+        <h4>Operating position</h4>
+        <ul>
+          <li>Local AI runs on the Windows 11 workstation through Ollama, 8K context.</li>
+          <li>AnythingLLM is the active knowledge-base and RAG layer.</li>
+          <li>Deterministic automation is preferred over AI-mediated control wherever possible.</li>
+          <li><em>Aurelia</em> uses local AI as a drafting collaborator, with human review before anything is kept.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Active work</h4>
+        <ul>
+          <li>Awaiting a server RAM upgrade, timed with a planned shutdown.</li>
+          <li>Backup hardware — HDD, enclosure, powered USB hub — staged for deployment.</li>
+          <li>Backup-and-restore verification still needed once deployed.</li>
+          <li>Repository documentation migrating from a minimal README to full docs.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="doc-approach">
+  <div class="wrap doc-approach-inner">
+    <h2>Documentation as an engineering tool, not decoration</h2>
+    <ul>
+      <li>Preserve why a decision was made, not only what changed.</li>
+      <li>Keep confirmed facts separate from hypotheses and future plans.</li>
+      <li>Record mistakes when they teach a reusable lesson.</li>
+      <li>Prefer a small number of well-linked documents over unstructured notes.</li>
+      <li>Never let an AI-generated explanation become a fact without verification.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+          <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Bronks Labs</div>
+          <div class="footer-tagline">Building. Learning. Documenting.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:marcin.j.korol@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bronks Labs.</span>
+      <span class="mono">status: active</span>
+    </div>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>
