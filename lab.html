@@ -68,7 +68,16 @@
   .status.implementation .dot{ background: var(--blue-status); }
 
   .card p.desc{ color: var(--ink-muted); font-size: 0.95rem; margin-bottom: 4px; }
-
+  .card-actions{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      margin-top:18px;
+  }
+  .card-actions details{
+      margin-top:0;
+      flex:1;
+  }
   .card details{ margin-top: 18px; border-top: 1px solid var(--border); padding-top: 14px; }
   .card summary{
     cursor: pointer; font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue);
