@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){var t=localStorage.getItem("theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.setAttribute("data-theme", t || (d?"dark":"light"));})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurelia — Bronks Labs</title>
+<meta name="description" content="Aurelia is an isekai fantasy novel drafted with local language models, edited with Claude, and documented like an engineering project — 23 chapters in, one prompt from the 24th.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+  /* ---------- Intro + cross-link ---------- */
+  .aurelia-intro{ padding: 72px 0 48px; }
+  .aurelia-intro .lede{ max-width: 640px; color: var(--ink-muted); font-size: 1.05rem; }
+
+  .cross-link{
+    margin-top: 36px;
+    display:flex; align-items:center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    border: 1px solid var(--border); border-radius: 6px; padding: 22px 26px;
+    background: var(--bg-subtle);
+  }
+  .cross-link-text{ font-family: var(--font-mono); font-size: 0.85rem; color: var(--ink-muted); }
+  .cross-link-text strong{ color: var(--ink); font-weight: 500; }
+  .cross-link .buttons{ display:flex; gap: 12px; flex-wrap: wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap: 8px;
+    font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.02em;
+    padding: 10px 16px; border-radius: 6px; border: 1px solid var(--border);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn.primary{ background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .btn.primary:hover{ opacity: 0.86; }
+  .btn.ghost{ color: var(--ink); }
+  .btn.ghost:hover{ border-color: var(--card-hover-border); background: var(--bg); }
+
+  /* ---------- Two-column: cards (35%) / text (65%) ---------- */
+  .split{ padding: 24px 0 72px; }
+  .split-grid{ display:grid; grid-template-columns: 35% 1fr; gap: 44px; align-items: start; }
+  @media (max-width: 900px){ .split-grid{ grid-template-columns: 1fr; gap: 40px; } }
+
+  .rail{ position: sticky; top: 92px; display:flex; flex-direction:column; gap: 20px; }
+  @media (max-width: 900px){ .rail{ position: static; } }
+
+  .rail .card{
+    border: 1px solid var(--border); border-radius: 6px; padding: 24px;
+    background: var(--bg); transition: border-color 0.15s ease;
+  }
+  .rail .card:hover{ border-color: var(--card-hover-border); }
+  .rail .card h3{
+    font-family: var(--font-display); font-weight: 600; font-size: 1rem; margin-bottom: 14px;
+    display:flex; align-items:center; justify-content: space-between; gap: 10px;
+  }
+  .status{
+    display:inline-flex; align-items:center; gap: 7px;
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+    background: var(--blue-dim); color: var(--blue-status);
+  }
+  .status .dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--blue-status); }
+
+  .rail .spec-table{ width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  .rail .spec-table tr{ border-bottom: 1px solid var(--border); }
+  .rail .spec-table tr:last-child{ border-bottom: none; }
+  .rail .spec-table td{ padding: 8px 0; vertical-align: top; }
+  .rail .spec-table td:first-child{
+    color: var(--ink-muted); font-family: var(--font-mono); font-size: 0.73rem;
+    width: 92px; padding-right: 10px; white-space: nowrap;
+  }
+
+  .doc-group{ margin-bottom: 16px; }
+  .doc-group:last-child{ margin-bottom: 0; }
+  .doc-group h4{
+    font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--blue); margin-bottom: 8px;
+  }
+  .doc-group p{ font-size: 0.86rem; color: var(--ink-muted); line-height: 1.55; }
+
+  .rail .principles{ list-style: none; }
+  .rail .principles li{
+    padding: 10px 0; border-top: 1px solid var(--border); font-size: 0.86rem; color: var(--ink-muted);
+    display:flex; gap: 9px;
+  }
+  .rail .principles li:last-child{ padding-bottom: 0; }
+  .rail .principles li::before{ content: '—'; color: var(--blue); flex-shrink: 0; }
+  .rail .principles strong{ color: var(--ink); font-weight: 500; }
+
+  /* ---------- Reading column ---------- */
+  .reading h2{
+    font-family: var(--font-display); font-weight: 600; font-size: 1.4rem;
+    margin-bottom: 16px; letter-spacing: -0.005em;
+  }
+  .reading > section{ margin-bottom: 56px; }
+  .reading > section:last-child{ margin-bottom: 0; }
+  .reading p{ color: var(--ink-muted); font-size: 0.98rem; margin-bottom: 14px; line-height: 1.75; }
+  .reading p:last-child{ margin-bottom: 0; }
+
+  /* ---------- Manuscript block (Prologue) ---------- */
+  .manuscript{
+    border: 1px solid var(--border); border-radius: 8px; background: var(--bg-subtle);
+    padding: 44px clamp(24px, 5vw, 52px);
+  }
+  .manuscript .filepath{
+    display:flex; align-items:center; gap: 8px; margin-bottom: 28px;
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-muted);
+  }
+  .manuscript .filepath .dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink:0; }
+  .manuscript .filepath .wc{ margin-left: auto; }
+  .manuscript h2{ margin-bottom: 24px; }
+  .manuscript p{
+    color: var(--ink); font-size: 1.03rem; line-height: 1.85; margin-bottom: 1.15em;
+    max-width: 62ch;
+  }
+  .manuscript p:first-of-type::first-letter{
+    font-family: var(--font-display); font-weight: 600; font-size: 3.2em; line-height: 0.85;
+    float: left; padding: 0.04em 0.08em 0 0; color: var(--blue);
+  }
+  .manuscript .end-mark{ margin-top: 8px; color: var(--ink-muted); font-family: var(--font-mono); font-size: 0.8rem; }
+
+  /* ---------- Workflow (full width, below split) ---------- */
+  .workflow{ padding: 24px 0 80px; border-top: 1px solid var(--border); }
+  .section-label{
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blue); display:block; margin-bottom: 14px;
+  }
+  .workflow h2{ font-family: var(--font-display); font-weight: 600; font-size: 1.5rem; margin-bottom: 12px; }
+  .workflow > .wrap > p.intro-p{ color: var(--ink-muted); max-width: 620px; margin-bottom: 40px; }
+
+  .flow{ max-width: 620px; }
+  .flow-step{ display:flex; gap: 18px; align-items:flex-start; padding-bottom: 8px; }
+  .flow-step .node{
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue);
+    border: 1px solid var(--border); background: var(--bg);
+    width: 34px; height: 34px; border-radius: 100px; flex-shrink: 0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .flow-step .body{ padding-top: 4px; }
+  .flow-step h4{ font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; margin-bottom: 4px; }
+  .flow-step p{ color: var(--ink-muted); font-size: 0.9rem; }
+  .flow-arrow{ margin-left: 17px; width: 1px; height: 26px; background: var(--border); }
+  .flow-note{
+    margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border);
+    color: var(--ink-muted); font-size: 0.92rem; max-width: 600px;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+      </svg>
+      Bronks Labs
+    </a>
+    <div class="nav-right">
+    <nav class="links">
+      <a href="lab.html">Lab</a>
+      <a href="journal.html">Journal</a>
+      <a href="blunders.html">Blunders</a>
+      <a href="philosophy.html">Philosophy</a>
+      <a href="about.html">About</a>
+    </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="banner-grid" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="banner-logo">
+      <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="#fff" stroke-width="5"/>
+        <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="#fff">B</text>
+      </svg>
+      <span>Bronks Labs</span>
+    </div>
+    <div class="brand-signature">
+      <div class="motto">Make it work first. Make it pretty last.</div>
+      <div class="quote">"Sometimes you don't even know what you're building until it starts working."</div>
+    </div>
+    <span class="label">Aurelia</span>
+    <h1>A world built one chapter at a time.</h1>
+    <p>Not generated — drafted, edited, and documented. A fantasy novel written with local models and Claude as collaborators, checked by hand before anything is kept.</p>
+  </div>
+</section>
+
+<section class="aurelia-intro">
+  <div class="wrap">
+    <p class="lede">Aurelia is an isekai without the usual mercy. Martin, the only person ever pulled from Earth into this world, gets no chosen-one powers to soften the landing — just a world that expects him to learn its languages, its customs, and its risks the hard way. This page is the project's write-up: what the story is, how it actually gets written, and what documentation backs it up.</p>
+
+    <div class="cross-link">
+      <div class="cross-link-text">Local models and the RAG setup behind this workflow are covered in full in <br><strong>AI Homelab</strong></div>
+      <div class="buttons">
+        <a class="btn primary" href="homelab.html">Read AI Homelab →</a>
+        <a class="btn ghost" href="lab.html">Back to Lab</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="split">
+  <div class="wrap split-grid">
+
+    <div class="rail">
+      <div class="card">
+        <h3>Project Snapshot <span class="status"><span class="dot"></span>Active</span></h3>
+        <table class="spec-table">
+          <tr><td>Genre</td><td>Fantasy — Isekai, non-traditional (no chosen-one powers)</td></tr>
+          <tr><td>Leads</td><td>Martin (POV) &amp; Ren</td></tr>
+          <tr><td>Progress</td><td>23 chapters complete — Chapter 24 prompt ready</td></tr>
+          <tr><td>Drafting</td><td>Gemma 3 12B &amp; Gemma 4 12B via Ollama</td></tr>
+          <tr><td>Editing</td><td>Claude — line edits &amp; continuity pass</td></tr>
+          <tr><td>Manuscript</td><td>Master copy in Google Docs</td></tr>
+          <tr><td>Retrieval</td><td>AnythingLLM, RAG over the doc set</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Documentation</h3>
+        <div class="doc-group">
+          <h4>World &amp; Lore</h4>
+          <p>History &amp; overview, races &amp; cultures, the Beastfolk (codex + language), magic system, spirits &amp; resonance, the Wayfarer's Veil, economy &amp; trade, languages.</p>
+        </div>
+        <div class="doc-group">
+          <h4>Characters</h4>
+          <p>Martin's field journal, Ren's character profile, current cast notes.</p>
+        </div>
+        <div class="doc-group">
+          <h4>Systems</h4>
+          <p>Adventurers Guild structure and mechanics.</p>
+        </div>
+        <div class="doc-group">
+          <h4>Continuity</h4>
+          <p>Master continuity log and lore summary, kept current alongside the manuscript.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Core Principles</h3>
+        <ul class="principles">
+          <li><span><strong>Story comes first.</strong> Technology supports it, never replaces it.</span></li>
+          <li><span><strong>Human creativity leads.</strong> Every major decision comes from the author.</span></li>
+          <li><span><strong>Consistency matters.</strong> New chapters respect the world that already exists.</span></li>
+          <li><span><strong>Document everything.</strong> The world grows with the story — documentation is what keeps that sustainable.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="reading">
+      <section>
+        <h2>What is Aurelia?</h2>
+        <p>Aurelia began as an experiment in AI-assisted storytelling and grew into an original fantasy world with its own history, cultures, geography, magic system, and cast. It follows Martin — an ordinary, middle-aged man who wakes up in Aurelia wearing a body twenty years younger, with no memory of how he got there and nothing resembling a special power to make the transition easier. He isn't the chosen one. Aurelia doesn't rearrange itself around him. Language, customs, and survival are all things he has to earn, one mistake at a time.</p>
+        <p>The one advantage he does have is the Wayfarer's Veil — a subtle effect that makes him read as lost and harmless rather than dangerous or important. It buys him time. It doesn't buy him competence.</p>
+        <p>The Adventurers Guild eventually gives him a way to make a living and a place in the world — along with a very real risk of being slowly reshaped by the same system that's providing for him. Ren, the story's second protagonist, brings her own thread into that same world. The tone sits somewhere between real stakes and quiet menace, cut with a lot of absurd, very human humor.</p>
+        <p>This isn't AI writing a novel automatically. Every plot decision, every character choice, and every direction the story takes comes from the author. Local models and Claude assist with drafting, editing, and continuity — and along the way, Aurelia has become the proving ground for the AI writing workflow documented across Bronks Labs.</p>
+      </section>
+
+      <section>
+        <h2>Writing Philosophy</h2>
+        <p>I don't write from an outline. I write towards moments.</p>
+        <p>While I'm working on one chapter, part of my mind is already exploring several possible futures — new scenes, conversations, twists, or pieces of worldbuilding that surface naturally as I write. Most disappear almost immediately. Some get written down for later. A few become moments I know the story is eventually going to reach.</p>
+        <p>Once an idea reaches that point, it stops being an idea and becomes a destination. I don't force the story toward it — I keep writing naturally and let the narrative create its own opportunity to get there. Sometimes that happens in the very next chapter. Sometimes it takes many chapters before everything else has developed enough for the moment to feel earned.</p>
+        <p>At any given time, I usually know where I'd like the story to go. I just don't know how long the journey will be.</p>
+      </section>
+
+      <section>
+        <div class="manuscript">
+          <div class="filepath"><span class="dot"></span>aurelia/prologue.md<span class="wc">~1,170 words</span></div>
+          <h2>Prologue</h2>
+          <p>The living room smelled of dust and old leather. It always had. Martin registered the scent the way you register a familiar song — not consciously, just as a confirmation that everything was where it was supposed to be. The remote was on the arm of the chair. The wine he wasn't drinking was on the coffee table. The television was enthusiastically explaining the ergonomic benefits of a chair that cost more than his first car.</p>
+          <p>The universe, apparently, had opinions about ergonomic chair commercials.</p>
+          <p>The displacement arrived without fanfare — no crack of thunder, no blinding light, no dramatic musical sting. One moment he was reaching for the remote with the specific focused intent of a man who has decided that no, actually, he will not be learning about lumbar support tonight. The next, the room dissolved into a swirling grey chaos that tasted faintly of iron filings and ozone, which is not a taste a person expects to encounter in their living room on a Tuesday.</p>
+          <p>He landed on something damp and yielding.</p>
+          <p>Grass, probably. He filed that under details to panic about later and focused on the more immediate problem of his skull, which felt strongly that it was about to crack open and was making its feelings known with considerable emphasis. When the spinning finally subsided, he pushed himself upright on trembling hands and blinked against an unfamiliar light — a diffuse, greenish glow that seemed to emanate from everything around him with the cheerful indifference of something that had absolutely no idea it was supposed to be alarming.</p>
+          <p>His living room was gone.</p>
+          <p>In its place stretched a forest of towering trees with bark the colour of bruised plums, crowding in on all sides with the quiet aggression of trees that had been there significantly longer than he had and intended to remain so. The air hung heavy and humid, thick with the drone of insects he couldn't identify. A path — barely more than a suggestion of a path, the kind made by animals with no particular destination — wound through the undergrowth ahead.</p>
+          <p>It looked exactly like a low-budget fantasy film. The kind he used to mock mercilessly during late-night movie marathons with a bottle of something red and a running commentary that his daughter had found simultaneously hilarious and exhausting.</p>
+          <p>He became aware, in the slow and terrible way of a man whose brain is rationing bad news into manageable portions, that he was wearing something that was not his clothes.</p>
+          <p>It was linen. Rough-spun, shapeless, vaguely medieval linen, hanging off him in a way that suggested it had been designed for a body type rather than a specific body. It scratched. It smelled of sunbaked earth and something vaguely herbal that he couldn't identify and didn't especially want to. He reached instinctively for his waistband, expecting denim, and found a cord.</p>
+          <p>A cord.</p>
+          <p>He stared at it for a moment with the expression of a man who has just discovered that the universe not only has a sense of humour but is not particularly concerned with whether he finds it funny.</p>
+          <p>He was also, he noticed, wearing slippers.</p>
+          <p>His own slippers. Blameless, comfortable, completely inappropriate slippers that had apparently made the crossing while his actual clothes had not. He considered this for a moment. Out of everything he owned — his phone, his wallet, his keys, his dignity — the universe had seen fit to preserve his slippers.</p>
+          <p>Brilliant, he thought. Absolutely brilliant.</p>
+          <p>Then came the rest of it.</p>
+          <p>The back pain — gone. Not improved, not manageable. Gone. He rotated his shoulders with the cautious optimism of a man who has learned not to trust sudden improvements, and felt nothing but a disconcerting, unfamiliar lightness. He looked at his hands. They were wrong. Not dramatically wrong, not horror-film wrong, just — his hands, but earlier. Smoother. The roadmap of small scars from years of tinkering with old motorcycles and hauling boxes at the bookstore was there in faint echo, but softened. Diminished. The prominent vein on his left forearm, a landmark he'd had since his thirties, was simply absent, as if it had decided not to bother.</p>
+          <p>He ran a hand over his face. Smooth. Taut. The jowls that had been making increasingly confident territorial claims over the past decade — gone. The stubble — gone. He pressed his fingers to his abdomen, where a surgical scar from a kidney removal ten years ago had lived as a permanent reminder that the human body is essentially a subscription service with unexpected cancellation policies.</p>
+          <p>Gone.</p>
+          <p>He sat with that for a moment.</p>
+          <p>"Right," he said to the forest, in the tone of a man conducting a very calm performance of not currently screaming. "So that's happening."</p>
+          <p>The forest offered insects in response. Somewhere above him, something called out in a register that suggested it was either very small or very far away or, potentially, deeply smug.</p>
+          <p>He was younger. Not healthier-middle-aged, not well-rested, not benefiting from a good diet and regular exercise. Younger. Twenty, perhaps. Twenty-two at a stretch. His brain, firmly and non-negotiably middle-aged, rattled around inside this new situation like a very experienced driver handed the keys to a car with completely different controls and no manual.</p>
+          <p>A flash of blue caught his eye. He turned. A leaf — enormous, easily the length of his forearm — pulsed with the same greenish light as everything else, the air around it shimmering like heat haze off summer tarmac. It did this with the calm confidence of something that had been pulsing gently in this forest for considerably longer than Martin had been alive, in either iteration.</p>
+          <p>He looked at it for a long moment.</p>
+          <p>"I," he informed the leaf, with great dignity, "am going to sit down."</p>
+          <p>He found a moss-covered log that seemed structurally committed to remaining a log for the foreseeable future and lowered himself onto it. A man in rough linen and bedroom slippers, in a forest that glowed, talking to vegetation. He tried to locate the part of himself that would normally generate a plan — a practical, sensible, step-by-step plan — and found it was currently unavailable, please try again later.</p>
+          <p>He closed his eyes. Reached for something familiar. His daughter's laugh. The smell of coffee on a Sunday morning. The comforting, slightly lumpy weight of his old leather armchair which, unlike his actual clothes, had apparently not followed him.</p>
+          <p>The memories came, but distantly. Photographs from someone else's album.</p>
+          <p>He opened his eyes and looked at the path disappearing into the gloom ahead.</p>
+          <p>Okay, he thought, with the particular brand of exhausted pragmatism that a certain kind of person develops after the universe has comprehensively made its point. Okay. Forest. Glowing things. Body that belongs to someone approximately twenty years younger than me. No idea where I am, no idea how I got here, no idea how to get back.</p>
+          <p>He looked down at the slippers.</p>
+          <p>At least I'll be comfortable.</p>
+          <p>He stood up, adjusted his cord — because apparently that was something he did now — and started walking.</p>
+          <div class="end-mark">— end of prologue —</div>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</section>
+
+<section class="workflow">
+  <div class="wrap">
+    <span class="section-label">The Workflow</span>
+    <h2>From a spark mid-chapter to a finished page</h2>
+    <p class="intro-p">Aurelia isn't planned out chapter by chapter in advance. It develops organically, and the workflow exists to keep that organic process consistent instead of chaotic.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="node">1</div>
+        <div class="body">
+          <h4>An idea surfaces mid-chapter</h4>
+          <p>While writing the current scene, a new beat, line, or piece of worldbuilding appears and gets marked as a destination rather than a plan.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">2</div>
+        <div class="body">
+          <h4>Local draft</h4>
+          <p>A tailored prompt goes to a local model — Gemma 3 12B or Gemma 4 12B, run through Ollama — for a structured first pass. It's a starting point, not a finished chapter.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">3</div>
+        <div class="body">
+          <h4>Editorial pass in Claude</h4>
+          <p>The draft becomes raw material. Strong lines are kept, weak ones are cut, and a fair amount gets rewritten by hand before the chapter is called finished.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">4</div>
+        <div class="body">
+          <h4>Continuity update</h4>
+          <p>Claude produces a chapter summary that gets folded into the Master Continuity file, so future sessions can reference past events accurately.</p>
+        </div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step">
+        <div class="node">5</div>
+        <div class="body">
+          <h4>Manuscript &amp; knowledge base</h4>
+          <p>The finished chapter goes into the master manuscript in Google Docs. Character, lore, and world documents are reviewed and updated periodically — not reworked after every single chapter.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="flow-note">AnythingLLM handles retrieval over the growing documentation set, so earlier chapters and worldbuilding stay reachable without re-reading hundreds of pages by hand — the same RAG setup covered in <a href="homelab.html" style="color:var(--blue);">AI Homelab</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <svg class="hex" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="50,4 93,27 93,73 50,96 7,73 7,27" fill="none" stroke="currentColor" stroke-width="5"/>
+          <text x="50" y="63" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="currentColor">B</text>
+        </svg>
+        <div>
+          <div class="footer-brand-text">Bronks Labs</div>
+          <div class="footer-tagline">Building. Learning. Documenting.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:marcin.j.korol@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bronks Labs.</span>
+      <span class="mono">status: active</span>
+    </div>
+  </div>
+</footer>
+
+<script src="theme.js"></script>
+</body>
+</html>
