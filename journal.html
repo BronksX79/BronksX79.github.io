@@ -118,7 +118,16 @@
 <section class="journal">
   <div class="wrap">
     <p class="journal-note"><strong><em>Chronological development logs tracking my transition from standalone Git repositories to public web services.</em></strong></p>
-    
+
+    <div class="entry">
+      <div class="date">AUG 2026</div>
+      <div>
+        <h3>Building real backup infrastructure — health-checked, scripted, scheduled</h3>
+        <p>Upgraded the server's RAM from 4GB to 8GB, then used that as the trigger to finally stop treating backups as a "planned" item in a rebuild doc and actually build them. Added a 256GB USB HDD, ran a full SMART health check before trusting it with anything, mounted it persistently via fstab. Wrote a script that dumps Immich's Postgres database properly (not just copying raw files — it's a named Docker volume, so pg_dump was the only real option anyway), mirrors the photo library, briefly stops and backs up Vaultwarden's tiny SQLite store, and folds in the existing weekly config snapshot — all onto the new drive, overwriting in place each week. Scheduled it in cron an hour behind the existing config backup job so the two never race each other. A second, offsite-ish copy on a flash drive is the next layer, once I've worked out which one of my old USB 2.0 drives is actually worth using.</p>
+        <span class="tag">Infrastructure</span>
+        <span class="tag">Backups</span>
+      </div>
+    </div>
     <div class="entry">
       <div class="date">AUG 2026</div>
       <div>
