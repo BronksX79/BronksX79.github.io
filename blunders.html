@@ -104,7 +104,40 @@
 <section class="blunders">
   <div class="wrap">
     <p class="blunders-note">Not tied to Bronks Labs specifically — anything, from any project, that wasted an afternoon and taught me something dumb-but-useful. Updated whenever something ships, not on a schedule.</p>
-
+    
+    <div class="entry">
+      <div class="date">AUG 2026</div>
+      <div>
+        <h3>A drive health check and a 13GB backup, at the same time, on the same disk</h3>
+        <p>Kicked off a SMART extended self-test on a new backup drive, then — without thinking about it — ran the actual backup script against that same drive a few minutes later. The self-test got silently aborted by the competing I/O. Nothing was damaged, just wasted 90% of a 96-minute test. Re-ran it properly afterward, alone.</p>
+        <div class="entry-tags">
+          <span class="tag">Hardware</span>
+          <span class="tag">Backups</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="date">AUG 2026</div>
+      <div>
+        <h3>Chasing a Postgres backup script that failed on a variable that was never there</h3>
+        <p>Wrote a backup script assuming Immich's database password lived in its .env file, since that's where the upload path was defined. It doesn't — Postgres' credentials are only set inside the container's own environment, set directly in the compose file. Spent a few minutes staring at unbound variable before just asking the running container what its own environment actually was, instead of trusting the file I assumed held the answer.</p>
+        <div class="entry-tags">
+          <span class="tag">Infrastructure</span>
+          <span class="tag">Backups</span>
+        </div>
+      </div>
+    </div>
+    <div class="entry">
+      <div class="date">AUG 2026</div>
+      <div>
+        <h3>The powered hub that wasn't powered</h3>
+        <p>Installing the RAM upgrade, the hub, and the new backup drive all in one stressed-out sitting, the drive just never showed up. Followed Google's AI Mode through a round of USB port swapping, chasing a wiring or driver problem that wasn't there. Turned out the "powered" part of the powered USB hub was doing a lot of load-bearing in that sentence — I'd never actually plugged it into the wall.</p>
+        <div class="entry-tags">
+          <span class="tag">Hardware</span>
+          <span class="tag">Backups</span>
+        </div>
+      </div>
+    </div>
     <div class="entry">
       <div class="date">AUG 2026</div>
       <div>
