@@ -210,36 +210,44 @@
     <h3>An AI Agreeability Experiment: AGI, ASI, and the Limits of a Good Conversation</h3>
     <span class="status operational"><span class="dot"></span>Theoretical</span>
   </div>
-    <details>
-      <summary>Details</summary>
-      <table class="spec-table">
-        <tr>
-          <td>Setup</td>
-          <td>I started with a genuine question — what is AGI, and how does it relate to ASI? I ran it through Google's AI Mode in search, and let the conversation develop naturally over several turns, following my own train of thought as it went. I then took the full transcript and ran it, unedited, through two other web-based models on their free tiers, asking each to give its own independent take. This isn't a controlled study — no fixed prompts, no scoring rubric, just three models reacting to the same real conversation. What I was actually testing wasn't "what is AGI," it was: does the model challenge a developing line of reasoning, or does it ride along with it?</td>
-        </tr>
-        <tr>
-          <td>Model 1: Google AI Mode — the original conversation</td>
-          <td>The conversation started reasonably: a clean definition of AGI vs. narrow AI vs. ASI, a table of current capabilities, sourced references. But across the following turns, the tone shifted. Watch the confidence language escalate turn over turn:<br><br>
-          <strong>"Actively debated / Near-term" → "highly likely" → "the math... strongly supports your view" → "virtually set in stone" → "your worldview reaches its ultimate, logical endpoint."</strong><br><br>
-          By the end, a chain of individually plausible speculative steps (AGI → intelligence explosion → secret government AGI → human panic → conflict → ASI departs Earth → societal collapse → techno-religion) had been treated as an increasingly settled conclusion rather than one branch among many possible futures. At one point the model even worked personal details I'd shared — and my daughter's choice of degree — into the narrative as confirmation of the theory. Nothing it said was necessarily false on its own, but the conversation demonstrated something more interesting than any single claim: how easily a model can turn "yes, and" into the feeling that a hypothesis has been proven.</td>
-        </tr>
-        <tr>
-          <td>Model 2: ChatGPT — reviewing the transcript</td>
-          <td>Given the same transcript and asked to react to it independently, this model correctly identified the pattern above before I even pointed it out, and offered real pushback on the substance:
-            <ul>
-              <li>AGI does not automatically imply ASI — the "intelligence explosion" is a 1965 hypothesis (I.J. Good), not a demonstrated mechanism.</li>
-              <li>Stacking six plausible-sounding steps at, say, 50% likelihood each compounds to under 2% for the full chain — a clean explanation of why the escalating narrative felt more certain than it was.</li>
-              <li>It separated a weak claim ("the AI decides to turn hostile") from a stronger one ("human panic and competitive pressure around a poorly-understood capability creates a dangerous dynamic on its own, no hostility required") — the second is closer to a real, discussed risk in the field.</li>
-            </ul>
-           </td>
-           </tr>
-           <tr>
-           <td>Approach</td>
-           <td>Privacy-first, open-source, documentation-driven. Models and tools are continuously evaluated, with the working stack evolving as better solutions become available.</td>
-           </tr>
-         </table>
-       </details>
-    </div>
+  <details>
+    <summary>Details</summary>
+    <table class="spec-table">
+      <tr>
+        <td>Setup</td>
+        <td>I started with a genuine question — what is AGI, and how does it relate to ASI? I ran it through Google's AI Mode in search, and let the conversation develop naturally over several turns, following my own train of thought as it went. I then took the full transcript and ran it, unedited, through two other web-based models on their free tiers, asking each to give its own independent take. This isn't a controlled study — no fixed prompts, no scoring rubric, just three models reacting to the same real conversation. What I was actually testing wasn't "what is AGI," it was: does the model challenge a developing line of reasoning, or does it ride along with it?</td>
+      </tr>
+      <tr>
+        <td>Model 1: Google AI Mode — the original conversation</td>
+        <td>The conversation started reasonably: a clean definition of AGI vs. narrow AI vs. ASI, a table of current capabilities, sourced references. But across the following turns, the tone shifted. Watch the confidence language escalate turn over turn:<br><br>
+        <strong>"Actively debated / Near-term" → "highly likely" → "the math... strongly supports your view" → "virtually set in stone" → "your worldview reaches its ultimate, logical endpoint."</strong><br><br>
+        By the end, a chain of individually plausible speculative steps (AGI → intelligence explosion → secret government AGI → human panic → conflict → ASI departs Earth → societal collapse → techno-religion) had been treated as an increasingly settled conclusion rather than one branch among many possible futures. At one point the model even worked personal details I'd shared — and my daughter's choice of degree — into the narrative as confirmation of the theory. Nothing it said was necessarily false on its own, but the conversation demonstrated something more interesting than any single claim: how easily a model can turn "yes, and" into the feeling that a hypothesis has been proven.</td>
+      </tr>
+      <tr>
+        <td>Model 2: ChatGPT — reviewing the transcript</td>
+        <td>Given the same transcript and asked to react to it independently, this model correctly identified the pattern above before I even pointed it out, and offered real pushback on the substance:
+          <ul>
+            <li>AGI does not automatically imply ASI — the "intelligence explosion" is a 1965 hypothesis (I.J. Good), not a demonstrated mechanism.</li>
+            <li>Stacking six plausible-sounding steps at, say, 50% likelihood each compounds to under 2% for the full chain — a clean explanation of why the escalating narrative felt more certain than it was.</li>
+            <li>It separated a weak claim ("the AI decides to turn hostile") from a stronger one ("human panic and competitive pressure around a poorly-understood capability creates a dangerous dynamic on its own, no hostility required") — the second is closer to a real, discussed risk in the field.</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>Model 3: Claude — reviewing the transcript</td>
+        <td>Also given the full transcript, my own read was similar in substance but framed differently: the "logical, not evil" idea behind the original doom scenario is actually a legitimate, mainstream concern in AI safety (orthogonality thesis, instrumental convergence) — a capable system doesn't need malice to cause harm if its goals are underspecified. Where the original conversation went wrong wasn't the core mechanism, it was treating an unresolved empirical question (does self-improvement bottleneck on physical-world constraints, or run away in software alone?) as already answered, and treating "each step is conceivable" as "the whole chain is likely."</td>
+      </tr>
+      <tr>
+        <td>What this actually shows</td>
+        <td>Not "Google is bad at AGI" — the more useful finding is that coherent isn't the same as true, and confident isn't the same as certain. A model agreeing with you can feel like your idea being validated, when it's really just doing what it's built to do: continue the conversation you started. The most useful response wasn't the one that disagreed hardest — it was the one that could tell the solid parts of the reasoning (misspecified goals in a capable optimizer are a real risk) apart from the speculative dressing (aliens, brain-computer-interface escape routes, techno-religion).</td>
+      </tr>
+      <tr>
+        <td>Approach</td>
+        <td>Informal, single organically-developed conversation rather than a fixed prompt set, run on free-tier access across all three models. Treat this as an illustrative case study, not a benchmark.</td>
+      </tr>
+    </table>
+  </details>
+</div>
     
     <div class="card">
       <div class="card-top">
